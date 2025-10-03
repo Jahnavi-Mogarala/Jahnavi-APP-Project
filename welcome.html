@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JP QuizBot — Welcome</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page welcome-page">
+  <header class="topbar">
+    <div class="brand-left">
+      <div class="logo small">JP</div>
+      <div>
+        <div class="brand-title small">JP QuizBot</div>
+        <div class="brand-sub tiny">JKUAD_0910</div>
+      </div>
+    </div>
+
+    <nav class="top-actions">
+      <div class="user-info" id="welcomeUser">Hello</div>
+      <button id="viewLeaderboardBtn" class="btn btn-ghost">Leaderboard</button>
+      <a href="index.html" class="btn btn-ghost">Logout</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="panel intro-panel">
+      <h1 class="glow">Welcome to JP QuizBot</h1>
+      <p class="lead">Choose a category below to begin. Each quiz has questions, instant feedback, and a summary with explanations. Scores go to the leaderboard.</p>
+
+      <div class="creators-card">
+        <img src="assets/profile-placeholder.png" alt="creators" class="creator-img">
+        <div>
+          <h3>Creators</h3>
+          <p><strong>Jahnavi Mogarala</strong> &amp; <strong>Prathiksa G</strong></p>
+          <p class="muted small">Developed for learning & practice • Dark neon theme</p>
+        </div>
+      </div>
+
+      <blockquote class="quote big">“Practice does not make perfect—perfect practice makes progress.”</blockquote>
+    </section>
+
+    <section class="panel grid-panel">
+      <h2>Pick a Category</h2>
+
+      <div class="grid categories">
+        <a class="cat-card" href="quiz.html?cat=java">
+          <div class="cat-ico">☕</div>
+          <h3>Java</h3>
+          <p class="muted">OOP, JVM, Collections, Exceptions, Code snippets</p>
+        </a>
+
+        <a class="cat-card" href="quiz.html?cat=c">
+          <div class="cat-ico">🔧</div>
+          <h3>C Programming</h3>
+          <p class="muted">Pointers, Memory, Syntax, Standard Library</p>
+        </a>
+
+        <a class="cat-card" href="quiz.html?cat=python">
+          <div class="cat-ico">🐍</div>
+          <h3>Python</h3>
+          <p class="muted">Syntax, Data structures, OOP, Standard libs</p>
+        </a>
+
+        <a class="cat-card" href="quiz.html?cat=webdev">
+          <div class="cat-ico">🌐</div>
+          <h3>Web Dev</h3>
+          <p class="muted">HTML/CSS/JS fundamentals & snippets</p>
+        </a>
+
+        <a class="cat-card" href="quiz.html?cat=gk">
+          <div class="cat-ico">🧠</div>
+          <h3>General Knowledge</h3>
+          <p class="muted">World facts, science, history, culture</p>
+        </a>
+
+        <a class="cat-card" href="quiz.html?cat=misc">
+          <div class="cat-ico">✨</div>
+          <h3>Mixed / Surprise</h3>
+          <p class="muted">Random from all categories</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="panel info-panel">
+      <h3>Platform Features</h3>
+      <ul>
+        <li>10+ questions per category with explanations</li>
+        <li>Timed mode (optional), instant feedback, summary</li>
+        <li>Leaderboard & export</li>
+        <li>Mobile responsive & accessible layout</li>
+      </ul>
+      <div class="small muted">Tip: Use the Topbar → Leaderboard to see top scores across categories.</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© JP QuizBot • Built by Jahnavi & Prathiksa</div>
+  </footer>
+
+  <div id="leaderboardModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>Leaderboard</h3>
+        <button id="closeLeaderboard" class="btn btn-ghost">Close</button>
+      </div>
+      <div class="modal-body" id="leaderboardBody"></div>
+      <div class="modal-foot">
+        <button id="exportLb" class="btn">Export CSV</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // page-specific initialization
+    document.getElementById('viewLeaderboardBtn').addEventListener('click', ()=>{
+      showLeaderboardModal();
+    });
+    document.getElementById('closeLeaderboard').addEventListener('click', hideLeaderboardModal);
+    document.getElementById('exportLb').addEventListener('click', exportLeaderboardCSV);
+
+    // inject username
+    const display = sessionStorage.getItem('qb_displayName') || sessionStorage.getItem('qb_username') || 'Guest';
+    document.getElementById('welcomeUser').textContent = 'Hello, ' + display;
+  </script>
+</body>
+</html>

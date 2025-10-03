@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QuizBot Platform — Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page login-page">
+  <main class="center-outer">
+    <section class="card login-card">
+      <div class="brand-row">
+        <div class="logo">JP</div>
+        <div>
+          <h1 class="brand-title">JP QuizBot</h1>
+          <div class="brand-sub">JKUAD_0910 — Multi-Category Quiz Platform</div>
+        </div>
+      </div>
+
+      <p class="lead quote">“Knowledge is power. Testing it is practice.”</p>
+
+      <form id="loginForm" class="form">
+        <label class="field">
+          <span>Username</span>
+          <input id="username" type="text" placeholder="e.g., johndoe" required>
+        </label>
+
+        <label class="field">
+          <span>Display Name (optional)</span>
+          <input id="displayName" type="text" placeholder="how you want to appear on leaderboards">
+        </label>
+
+        <div class="form-row">
+          <button type="submit" class="btn btn-primary">Enter Platform</button>
+          <a href="#" id="visitorBtn" class="btn btn-ghost">Continue as Visitor</a>
+        </div>
+      </form>
+
+      <footer class="small muted">Created by <strong>Jahnavi Mogarala</strong> & <strong>Prathiksa G</strong></footer>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    // minimal page-specific JS handled in script.js
+    document.getElementById('loginForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const u = document.getElementById('username').value.trim();
+      const d = document.getElementById('displayName').value.trim();
+      if (!u) return alert('Please enter a username.');
+      sessionStorage.setItem('qb_username', u);
+      if (d) sessionStorage.setItem('qb_displayName', d);
+      location.href = 'welcome.html';
+    });
+    document.getElementById('visitorBtn').addEventListener('click', (e)=>{
+      e.preventDefault();
+      sessionStorage.setItem('qb_username','visitor_' + Date.now());
+      sessionStorage.setItem('qb_displayName','Visitor');
+      location.href = 'welcome.html';
+    });
+  </script>
+</body>
+</html>

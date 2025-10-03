@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JP QuizBot — Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page quiz-page">
+  <header class="topbar">
+    <div class="brand-left">
+      <div class="logo small">JP</div>
+      <div>
+        <div class="brand-title small">JP QuizBot</div>
+        <div class="brand-sub tiny" id="catLabel">Category</div>
+      </div>
+    </div>
+
+    <nav class="top-actions">
+      <div id="userLabel"></div>
+      <a href="welcome.html" class="btn btn-ghost">Back</a>
+      <button id="openLB" class="btn btn-ghost">Leaderboard</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="panel quiz-panel large">
+      <div class="quiz-head">
+        <h2 id="quizTitle">Loading...</h2>
+        <div class="meta">
+          <label class="small muted">Questions:</label>
+          <select id="numQ">
+            <option value="10">10</option>
+            <option value="15" selected>15</option>
+            <option value="20">20</option>
+          </select>
+
+          <label class="small muted">Timed:</label>
+          <input type="checkbox" id="timedToggle">
+
+          <button id="startBtn" class="btn">Start Quiz</button>
+        </div>
+      </div>
+
+      <div id="quizArea" class="quiz-area hidden">
+        <div class="quiz-progress">
+          <div id="progressText">0 / 0</div>
+          <div id="timerText" class="muted small">00:00</div>
+        </div>
+
+        <div id="questionContainer" class="question-container"></div>
+
+        <div class="quiz-controls">
+          <button id="prevQ" class="btn btn-ghost">Previous</button>
+          <button id="nextQ" class="btn btn-ghost">Next</button>
+          <button id="submitQuizBtn" class="btn btn-primary">Submit Quiz</button>
+        </div>
+      </div>
+
+      <div id="summaryArea" class="summary-area hidden"></div>
+    </section>
+
+    <aside class="panel stats-panel">
+      <h3>Quick Stats</h3>
+      <div class="stat-row"><strong id="statCorrect">0</strong><span>Correct</span></div>
+      <div class="stat-row"><strong id="statWrong">0</strong><span>Wrong</span></div>
+      <div class="stat-row"><strong id="statUnanswered">0</strong><span>Unanswered</span></div>
+
+      <div class="leader-mini">
+        <h4>Top Scores — This Category</h4>
+        <ol id="miniLeader"></ol>
+        <a href="#" id="viewMoreLB" class="small muted">View full leaderboard</a>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="small muted">Good luck — may your answers be correct ✨</div>
+  </footer>
+
+  <div id="leaderboardModal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>Leaderboard</h3>
+        <button id="closeLeaderboardBtn" class="btn btn-ghost">Close</button>
+      </div>
+      <div class="modal-body" id="leaderboardBody2"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // page-specific init:
+    const user = sessionStorage.getItem('qb_displayName') || sessionStorage.getItem('qb_username') || 'Guest';
+    document.getElementById('userLabel').textContent = user;
+    document.getElementById('openLB').addEventListener('click', ()=> showLeaderboardModal());
+    document.getElementById('closeLeaderboardBtn').addEventListener('click', hideLeaderboardModal);
+
+    // start the quiz logic
+    initQuizPage(); // function defined in script.js
+  </script>
+</body>
+</html>
